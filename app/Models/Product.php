@@ -11,6 +11,7 @@ class Product extends Model
     use HasFactory;
     
     protected $guarded = [];
+    protected $with = ['category'];
 
     public static function booted() {
         static::creating(function (Product $product) {
