@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TokenGeneratorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,5 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('products', ProductController::class);
 
 Route::post('token/generator', TokenGeneratorController::class);
+
+Route::get('search', SearchController::class);
