@@ -34,6 +34,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        $this->authorize('if_moderator');
+
         $product = Product::create($request->toArray());
 
         return response()->json([
@@ -62,6 +64,8 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+        $this->authorize('if_admin');
+
         $data = $request->toArray();
         $data['slug'] = strtolower(Str::slug($data['name'] . '-' . Str::random(6)));
         $product->update($data);
