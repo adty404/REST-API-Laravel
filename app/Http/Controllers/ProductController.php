@@ -55,9 +55,16 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $data = $request->toArray();
+        $data['slug'] = strtolower(Str::slug($data['name'] . '-' . Str::random(6)));
+        $product->update($data);
+
+        return response()->json([
+            'message' => 'Product was updated',
+            'data' => new ProductSingleResource($product),
+        ]);
     }
 
     /**
